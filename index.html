@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mariyam Rila M M · A Small Universe — Portfolio</title>
+<meta name="description" content="The portfolio-universe of Mariyam Rila M M, CSE student in India: explore skill-planets, mission projects, origin story, and send a signal." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg0:#04060e; --bg1:#0a1024;
+  --ink:#eceaf6; --muted:#a7aec7;
+  --teal:#5eead4; --purple:#a78bfa; --pink:#ff6ec7; --gold:#f6c453;
+  --grad:linear-gradient(92deg,var(--gold),var(--pink));
+  --card:rgba(255,255,255,.045); --card-brd:rgba(255,255,255,.12);
+  --radius:18px; --max:1080px;
+  --serif:"Playfair Display",Didot,Georgia,serif; --sans:"Jost",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+html,body{overflow-x:hidden}
+body{
+  margin:0;color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;
+  background:
+    radial-gradient(900px 600px at 12% -5%,rgba(167,139,250,.16),transparent 60%),
+    radial-gradient(800px 560px at 88% 8%,rgba(94,234,212,.12),transparent 60%),
+    radial-gradient(1000px 700px at 50% 110%,rgba(255,110,199,.10),transparent 60%),
+    linear-gradient(var(--bg0),var(--bg1));
+  background-color:var(--bg0);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;letter-spacing:-.01em;margin:0 0 .6rem}
+h2{font-size:clamp(1.9rem,4.5vw,2.7rem)}
+h2 em, h1 em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+a{color:var(--teal)}
+::selection{background:rgba(255,110,199,.35)}
+.container{width:min(100% - 2.5rem,var(--max));margin-inline:auto;position:relative;z-index:1}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 .7rem}
+.section{padding:4.5rem 0}
+.section-lead{color:var(--muted);max-width:62ch}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.6rem 1rem;z-index:200;border-radius:0 0 10px 0}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ============ NAV ============ */
+.navwrap{position:sticky;top:0;z-index:50;background:rgba(6,9,20,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09)}
+.nav{display:flex;align-items:center;gap:1rem;min-height:64px;flex-wrap:wrap;padding-top:.5rem;padding-bottom:.5rem}
+.logo{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--ink);text-decoration:none;font-size:1.25rem;margin-right:auto}
+.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.navlinks{display:flex;gap:.25rem 1.1rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.navlinks a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.navlinks a:hover,.navlinks a.active{color:var(--ink)}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-block;padding:.75rem 1.35rem;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--sans);font-size:.98rem}
+.btn-primary{background:var(--grad);color:#1c0b16}
+.btn-primary:hover{filter:brightness(1.08);text-decoration:none}
+.btn-ghost{border-color:var(--card-brd);color:var(--ink);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--pink);text-decoration:none}
+.btn-small{padding:.45rem .95rem;font-size:.85rem}
+
+/* ============ HERO ============ */
+.hero{padding:5.5rem 0 3.5rem;max-width:780px}
+.hero h1{font-size:clamp(2.5rem,7vw,4.4rem);font-weight:560}
+.pitch{font-size:clamp(1.1rem,2.4vw,1.35rem);color:var(--ink)}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.8rem 0 .6rem}
+.hero-meta{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+
+/* ============ SOLAR SYSTEM ============ */
+.system-shell{text-align:center}
+.system{position:relative;width:min(94vw,600px);aspect-ratio:1/1;margin:1.5rem auto .5rem}
+.orbit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px dashed rgba(255,255,255,.20);border-radius:50%;pointer-events:none}
+.sun{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border:none;cursor:pointer;color:#2a1503;font-family:var(--serif);
+  background:radial-gradient(circle at 35% 32%,#fff7d6 0%,#fbd971 28%,#f59e4c 55%,#e2574c 78%,#a83a5e 100%);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 0 40px 8px rgba(246,196,83,.45),0 0 120px 30px rgba(255,110,199,.18);
+  animation:sunpulse 3.2s ease-in-out infinite;
+  padding:6px;line-height:1.15;
+}
+.sun span{font-style:italic;font-weight:600;font-size:clamp(.8rem,2.6vw,1.05rem);padding:0 .4em}
+@keyframes sunpulse{0%,100%{box-shadow:0 0 40px 8px rgba(246,196,83,.45),0 0 120px 30px rgba(255,110,199,.18)}50%{box-shadow:0 0 60px 16px rgba(246,196,83,.6),0 0 150px 44px rgba(255,110,199,.28)}}
+.planet{
+  position:absolute;border:none;cursor:pointer;border-radius:50%;padding:0;
+  transform:translate(-50%,-50%);
+  box-shadow:inset -6px -8px 14px rgba(0,0,0,.55),0 0 18px 2px var(--glow,rgba(94,234,212,.35));
+}
+.planet:hover,.planet:focus-visible{box-shadow:inset -6px -8px 14px rgba(0,0,0,.55),0 0 26px 6px var(--glow,rgba(94,234,212,.5))}
+.planet .plabel{
+  position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  white-space:nowrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;
+  background:rgba(6,9,20,.85);border:1px solid var(--card-brd);color:var(--ink);
+  padding:.15rem .55rem;border-radius:999px;opacity:0;transition:opacity .18s;pointer-events:none;
+}
+.planet:hover .plabel,.planet:focus-visible .plabel,.planet[aria-expanded="true"] .plabel{opacity:1}
+.planet .ring{position:absolute;top:50%;left:50%;width:190%;height:64%;transform:translate(-50%,-50%) rotate(-18deg);border:2px solid rgba(246,196,83,.65);border-radius:50%;pointer-events:none;box-shadow:0 0 8px rgba(246,196,83,.35)}
+.planet::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.8) 0%,rgba(255,255,255,.12) 26%,transparent 46%);pointer-events:none}
+.sys-hint{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin:.4rem 0 0}
+
+/* dossier */
+.dossier{max-width:640px;margin:1.4rem auto 0;background:var(--card);border:1px solid var(--card-brd);border-radius:var(--radius);padding:1.4rem 1.5rem;text-align:left;backdrop-filter:blur(8px)}
+.dossier h3{font-size:1.5rem;margin-bottom:.1rem}
+.dtype{display:inline-block;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(94,234,212,.4);border-radius:999px;padding:.15rem .7rem;margin:.4rem 0 .8rem}
+.dossier .blurb{font-family:var(--serif);font-style:italic;font-size:1.1rem;margin:.2rem 0 .8rem}
+.dossier ul{margin:.4rem 0 1rem;padding-left:1.2rem;color:var(--muted)}
+.dossier ul li{margin-bottom:.3rem}
+.dossier ul strong{color:var(--ink)}
+.meter{display:flex;gap:.4rem;align-items:center;margin-top:.4rem;flex-wrap:wrap}
+.meter .seg{width:34px;height:10px;border-radius:99px;border:1px solid var(--card-brd);background:rgba(255,255,255,.05)}
+.meter .seg.on{background:var(--grad);border-color:transparent}
+.meter small{color:var(--muted);font-family:var(--mono);font-size:.75rem;margin-left:.4rem}
+
+/* ============ MISSIONS ============ */
+.mgrid{display:grid;gap:1.1rem;margin-top:1.6rem;grid-template-columns:1fr}
+.mcard{background:var(--card);border:1px solid var(--card-brd);border-radius:var(--radius);padding:1.4rem;transition:transform .25s,box-shadow .25s,border-color .25s;backdrop-filter:blur(8px)}
+.mcard:hover{transform:translateY(-6px);border-color:rgba(255,110,199,.55);box-shadow:0 18px 50px -18px rgba(255,110,199,.45)}
+.mtop{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.mcode{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.08em}
+.badge{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.2rem .7rem;border:1px solid}
+.b-launched{color:var(--teal);border-color:rgba(94,234,212,.5)}
+.b-orbit{color:var(--purple);border-color:rgba(167,139,250,.5)}
+.b-mapping{color:var(--gold);border-color:rgba(246,196,83,.5)}
+.mcard h3{font-size:1.4rem}
+.mrow{margin:.55rem 0;color:var(--muted);font-size:.95rem}
+.mrow strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.15rem}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem;padding:0;margin:.9rem 0}
+.chips li{font-family:var(--mono);font-size:.75rem;border:1px solid var(--card-brd);border-radius:999px;padding:.2rem .65rem;background:rgba(255,255,255,.03)}
+.mlinks{display:flex;gap:1.1rem;margin-top:.4rem}
+.mlinks a{font-weight:600;font-size:.95rem}
+
+/* ============ ORIGIN ============ */
+.origin-prose{font-family:var(--serif);font-size:clamp(1.15rem,2.6vw,1.5rem);line-height:1.55;max-width:62ch}
+.origin-prose em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.facts{display:grid;gap:1rem;margin-top:1.8rem;grid-template-columns:1fr}
+.fact{background:var(--card);border:1px solid var(--card-brd);border-radius:var(--radius);padding:1.1rem 1.2rem}
+.fact h3{font-family:var(--mono);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:.35rem}
+.fact p{margin:0}
+
+/* trophy shelf */
+.shelf-title{font-size:1.4rem;margin:2.2rem 0 1rem}
+
+/* rest stop */
+.quote-card{max-width:680px;margin:1.6rem auto 0;background:var(--card);border:1px solid rgba(255,110,199,.35);border-radius:var(--radius);padding:1.8rem;text-align:center;backdrop-filter:blur(8px)}
+.quote-card blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0 0 .7rem;transition:opacity .4s}
+.quote-card blockquote.fade{opacity:0}
+.quote-card figcaption{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;color:var(--gold)}
+.qnav{display:flex;gap:.7rem;justify-content:center;margin-top:1rem}
+.qnav button{background:rgba(255,255,255,.04);border:1px solid var(--card-brd);color:var(--ink);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;font-family:var(--sans)}
+.qnav button:hover{border-color:var(--pink)}
+
+/* wish box */
+.wish{max-width:560px;margin:2.2rem auto 0;background:var(--card);border:1px solid rgba(167,139,250,.4);border-radius:var(--radius);padding:1.6rem;text-align:center}
+.wish h3{font-size:1.5rem}
+.wish form{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;justify-content:center}
+.wish input{flex:1 1 220px;background:var(--bg0);border:1px solid var(--card-brd);border-radius:999px;color:var(--ink);padding:.7rem 1.1rem;font:inherit}
+.wish input:focus{outline:2px solid var(--purple);outline-offset:1px}
+.shelf{display:grid;gap:1rem;grid-template-columns:1fr}
+.trophy{display:flex;gap:1rem;background:var(--card);border:1px solid var(--card-brd);border-radius:var(--radius);padding:1.1rem 1.2rem;align-items:flex-start;transition:transform .25s,border-color .25s,box-shadow .25s}
+.trophy:hover{transform:translateY(-4px);border-color:rgba(246,196,83,.55);box-shadow:0 16px 44px -18px rgba(246,196,83,.4)}
+.tico{font-size:1.6rem;line-height:1}
+.trophy strong{font-family:var(--serif);font-size:1.1rem}
+.trophy p{margin:.25rem 0 0;color:var(--muted);font-size:.95rem}
+
+/* ============ CONTACT / FOOTER ============ */
+.contact{text-align:center;padding-bottom:3rem}
+.contact h2{font-size:clamp(2rem,5vw,3rem)}
+.clinks{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+footer{border-top:1px solid rgba(255,255,255,.09);padding:1.6rem 0 2.4rem;color:var(--muted);font-size:.88rem;position:relative;z-index:1}
+.foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:1.4rem;transform:translate(-50%,140%);z-index:100;
+  background:rgba(10,14,30,.92);border:1px solid rgba(246,196,83,.55);color:var(--ink);
+  border-radius:14px;padding:.8rem 1.2rem;max-width:min(92vw,480px);text-align:center;
+  transition:transform .3s ease;backdrop-filter:blur(10px);font-size:.95rem;
+}
+.toast.show{transform:translate(-50%,0)}
+
+/* ---------- welcome veil ---------- */
+body.locked{overflow:hidden}
+.veil{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(4,6,14,.66);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.veil[hidden]{display:none}
+.veil-card{max-width:560px;text-align:center;background:rgba(12,17,36,.9);border:1px solid rgba(246,196,83,.55);border-radius:22px;padding:2.2rem 2rem;box-shadow:0 0 60px -12px rgba(246,196,83,.5),0 0 120px -30px rgba(255,110,199,.5);animation:floaty 4s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.veil-card h2{font-size:clamp(1.7rem,5vw,2.4rem)}
+.veil-card p{color:var(--muted)}
+.veil-card .hero-actions{justify-content:center;margin-bottom:0}
+.veil-face{font-size:2.6rem;display:block;margin-bottom:.4rem;filter:drop-shadow(0 0 18px rgba(246,196,83,.7))}
+
+/* reveal (only when JS runs) */
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (min-width:640px){  .mgrid{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .shelf{grid-template-columns:1fr 1fr}
+}
+@media (min-width:960px){
+  .mgrid{grid-template-columns:repeat(3,1fr)}
+  .facts{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sun{animation:none}
+  .veil-card{animation:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="veilTitle" hidden>
+  <div class="veil-card">
+    <span class="veil-face" aria-hidden="true">👩‍🚀</span>
+    <p class="eyebrow">✦ Rila here — live from mission control</p>
+    <h2 id="veilTitle">Well, look who drifted in…</h2>
+    <p>You found my universe — every planet hand-placed, every mission real. Buckle up, traveller. Ready to hop in?</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="hopIn">Hop in ✦</button>
+      <button class="btn btn-ghost" id="wander">Just looking around</button>
+    </div>
+  </div>
+</div>
+
+<header class="navwrap">
+  <nav class="nav container" aria-label="Primary">
+    <a class="logo" href="#top">✦ <b>Rila</b>·verse</a>
+    <ul class="navlinks">
+      <li><a href="#planets">Planets</a></li>
+      <li><a href="#missions">Missions</a></li>
+      <li><a href="#origin">Origin</a></li>
+      <li><a href="#reststop">Rest stop</a></li>
+      <li><a href="#contact">Signal</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero container" id="top">
+    <p class="eyebrow reveal">✦ Incoming transmission</p>
+    <h1 class="reveal">Plot twist: you've landed in the universe of <em id="heroName">Mariyam Rila M M</em> — and yes, she built it herself.</h1>
+    <p class="pitch reveal" id="heroPitch">A CSE student who builds small worlds that actually work.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#planets">Begin exploring ↓</a>
+      <a class="btn btn-ghost" href="#contact" id="heroSignal">Send a signal</a>
+    </div>
+    <p class="hero-meta reveal" id="heroMeta">CSE student · India · currently in orbit around IoT &amp; full-stack dev</p>
+  </section>
+
+  <!-- PLANETS -->
+  <section class="section container system-shell" id="planets">
+    <p class="eyebrow reveal">Pick a planet</p>
+    <h2 class="reveal">Every skill is a <em>world</em> I tend</h2>
+    <p class="section-lead reveal" style="margin-inline:auto">Hover to pause a planet in its tracks. Click one to open its dossier. Click the sun — I dare you.</p>
+    <div class="system reveal" id="system" role="group" aria-label="Interactive solar system of skills"></div>
+    <p class="sys-hint">◉ 6 planets · dashed rings are safe flight paths · all bodies clickable</p>
+    <div class="dossier" id="dossier" aria-live="polite">
+      <h3 id="dName">🛰 No planet selected</h3>
+      <p class="muted" id="dHint">Mission control suggests clicking a planet above to inspect its dossier.</p>
+      <div id="dBody" hidden>
+        <span class="dtype" id="dType"></span>
+        <p class="blurb" id="dBlurb"></p>
+        <ul id="dNotes"></ul>
+        <div class="meter" id="dMeter" aria-label="Skill level"></div>
+      </div>
+    </div>
+    <noscript><p class="muted">Enable JavaScript to fly the solar system. The planets: Python, Java, C, SQL &amp; PostgreSQL, React + Node.js, IoT &amp; ESP32.</p></noscript>
+  </section>
+
+  <!-- MISSIONS -->
+  <section class="section container" id="missions">
+    <p class="eyebrow reveal">Mission log</p>
+    <h2 class="reveal">Three missions, <em>all systems go</em></h2>
+    <p class="section-lead reveal">Real problems, real builds, real outcomes — transmitted from my corner of the galaxy.</p>
+    <div class="mgrid" id="mgrid"></div>
+  </section>
+
+  <!-- ORIGIN -->
+  <section class="section container" id="origin">
+    <p class="eyebrow reveal">Origin story</p>
+    <h2 class="reveal">How this universe <em>began</em></h2>
+    <p class="origin-prose reveal" id="originProse">I'm <em>Mariyam Rila M M</em>, a Computer Science Engineering student in Mangalore, India, with a strong pull toward <em>software development, problem-solving, and emerging tech</em>. I speak fluent C, Java and Python, I've steered IoT and DBMS expeditions with real crews, and I moonlight as a public speaker and college event host — because even the best mission needs a good narrator.</p>
+    <div class="facts">
+      <div class="fact reveal"><h3>⌂ Home base</h3><p>Mangalore, India</p></div>
+      <div class="fact reveal"><h3>✎ Class</h3><p>B.E. CSE, P.A College of Engineering · 2024–2028 · CGPA 9.0/10</p></div>
+      <div class="fact reveal"><h3>◉ Current mission</h3><p>IoT systems + full-stack apps; levelling up industry-ready skills</p></div>
+      <div class="fact reveal"><h3>✦ Open to</h3><p>Internships, project collabs, hackathons &amp; speaking gigs</p></div>
+    </div>
+    <h3 class="shelf-title reveal">The trophy shelf <span class="muted">— yes, I'm flexing</span></h3>
+    <div class="shelf">
+      <div class="trophy reveal"><span class="tico">🏆</span><div><strong>1st Prize — Oratocracy</strong><p>Out-spoke every competitor in the room. The mic still talks about it.</p></div></div>
+      <div class="trophy reveal"><span class="tico">🎤</span><div><strong>College event host</strong><p>Commanded stages before I commanded servers — crowds of hundreds, zero stage fright.</p></div></div>
+      <div class="trophy reveal"><span class="tico">💡</span><div><strong>Hackathon builder</strong><p>Ship fast, pitch faster — my demos come with their own narration.</p></div></div>
+      <div class="trophy reveal"><span class="tico">🛰</span><div><strong>EMBED club core</strong><p>IoT &amp; embedded systems crew — where my ESP32 obsession is fully encouraged.</p></div></div>
+      <div class="trophy reveal"><span class="tico">🎓</span><div><strong>CGPA 9.0/10</strong><p>Nerdy and proud. My code compiles and so do my grades.</p></div></div>
+    </div>
+  </section>
+
+  <!-- REST STOP -->
+  <section class="section container contact" id="reststop">
+    <p class="eyebrow reveal" style="text-align:center">Rest stop</p>
+    <h2 class="reveal">Traveller, <em>rest a while</em></h2>
+    <p class="section-lead reveal" style="margin-inline:auto;text-align:center">Thank you for stopping by my little universe — truly. Pull up a moon rock, stay as long as you like. You are welcome here exactly as you are, and wherever you're headed next, I hope you get there shining. 💛</p>
+    <figure class="quote-card reveal">
+      <blockquote id="quoteText" aria-live="polite">Loading stardust…</blockquote>
+      <figcaption id="quoteBy">— mission control</figcaption>
+    </figure>
+    <div class="qnav reveal">
+      <button id="qPrev" aria-label="Previous message">← Prev</button>
+      <button id="qNext" aria-label="Next message">Next →</button>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section container contact" id="contact">
+    <p class="eyebrow reveal" style="text-align:center">Incoming signal</p>
+    <h2 class="reveal">Want to build <em>something</em> together?</h2>
+    <p class="section-lead reveal" style="margin-inline:auto;text-align:center">Recruiters, collaborators, fellow travellers — my frequency is open. I reply within 1–2 days.</p>
+    <div class="clinks reveal" id="clinks"></div>
+    <div class="wish reveal">
+      <h3>Psst — make a wish ✦</h3>
+      <p class="muted" style="margin:.2rem 0 0">Type a wish, send it skyward, and watch it land among the stars.</p>
+      <form id="wishForm">
+        <input type="text" id="wishInput" maxlength="120" placeholder="I wish…" aria-label="Type your wish" />
+        <button class="btn btn-primary btn-small" type="submit" style="padding:.7rem 1.3rem;font-size:.95rem">Send it to the stars</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <span>© <span id="year"></span> <span id="footName">Mariyam Rila M M</span> · made of stardust and audacity</span>
+    <a href="#top">Back to launchpad ↑</a>
+  </div>
+</footer>
+
+<script>
+"use strict";
+document.documentElement.classList.add("js");
+
+/* ================================================================
+   ★ EDIT ONLY THIS BLOCK — everything on the page renders from it ★
+================================================================ */
+const ME = {
+  name: "Mariyam Rila M M",
+  role: "CSE student in India",
+  pitch: "A CSE student who builds small worlds that actually work.",
+  email: "mariyamrilamm@gmail.com",
+  github: "",        // e.g. "https://github.com/yourhandle"
+  linkedin: "https://www.linkedin.com/in/mariyam-rila-m-m-431936382",
+  resume: "resume.pdf" // drop your resume.pdf next to this file (or paste a URL)
+};
+
+// [skill, type, level 1-5, fun line, where I used it (array)]
+const PLANETS = [
+  { name: "Python",       type: "Language",   level: 4, rings: false,
+    blurb: "A teal giant where automation scripts rain upward.",
+    usedIn: ["Syncura health-monitoring concept", "College lab & coursework"] },
+  { name: "Java",         type: "Language",   level: 4, rings: true,
+    blurb: "A sturdy ringed world built for long OOP expeditions.",
+    usedIn: ["DSA practice", "OOP coursework projects"] },
+  { name: "C",            type: "Language",   level: 4, rings: false,
+    blurb: "The molten-core planet, orbiting closest to the hardware sun.",
+    usedIn: ["Embedded basics", "Arduino-adjacent tinkering"] },
+  { name: "SQL · PostgreSQL", type: "Data",   level: 4, rings: true,
+    blurb: "A cratered moon-base guarding tables of travel treasure.",
+    usedIn: ["Travel & Tour Booking Management System"] },
+  { name: "React + Node.js", type: "Full-stack", level: 3, rings: false,
+    blurb: "Twin moons assembling booking flows by starlight.",
+    usedIn: ["Travel & Tour Booking Management System"] },
+  { name: "IoT · ESP32",  type: "Hardware",   level: 4, rings: false,
+    blurb: "A buzzing relay planet that obeys voice commands.",
+    usedIn: ["Home Automation System", "Syncura concept", "EMBED club builds"] },
+];
+
+// [mission code, status, title, problem, built, result, stack, code link, demo link]
+const MISSIONS = [
+  { code: "MISSION-01", status: "Launched", title: "Home Automation System",
+    problem: "Appliances could only be switched by hand — no remote or hands-free control.",
+    built: "IoT system on an ESP32 with voice-control interfaces, sensors and relay modules.",
+    result: "Hands-free appliance control via voice commands on low-cost hardware.",
+    stack: ["ESP32", "IoT", "Sinric Pro", "Sensors", "Relay modules"],
+    code: "", demo: "" },
+  { code: "MISSION-02", status: "In orbit", title: "Travel & Tour Booking Management System",
+    problem: "Packages, hotels, bookings, payments, reviews and itineraries lived in scattered chaos.",
+    built: "DBMS-backed platform covering destinations, bookings, payments, coupons and itineraries — as team leader.",
+    result: "One end-to-end flow from browsing packages to booking, payment and itinerary.",
+    stack: ["PostgreSQL", "SQL", "Node.js", "React", "Postman"],
+    code: "", demo: "" },
+  { code: "MISSION-03", status: "Mapping", title: "Syncura — Health Monitoring Concept",
+    problem: "Patients with heartbeat fluctuations need help before a situation escalates.",
+    built: "Monitoring concept tracking heartbeat data and firing real-time alerts.",
+    result: "Blueprint for faster caregiver response through continuous monitoring.",
+    stack: ["IoT", "Monitoring systems", "Real-time alerts"],
+    code: "", demo: "" },
+];
+/* ======================= end of editable block ======================= */
+
+const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (s) => document.querySelector(s);
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove("show"), 3200);
+}
+
+/* ---------- welcome veil: Rila greets every visitor ---------- */
+const veil = document.getElementById("veil");
+function closeVeil(hopIn) {
+  if (veil.hidden) return;
+  veil.hidden = true;
+  document.body.classList.remove("locked");
+  if (hopIn) document.getElementById("planets").scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
+  toast("Welcome aboard, traveller ✦");
+}
+setTimeout(() => {
+  veil.hidden = false;
+  document.body.classList.add("locked");
+  document.getElementById("hopIn").focus({ preventScroll: true });
+}, prefersReduced ? 100 : 600);
+document.getElementById("hopIn").addEventListener("click", () => closeVeil(true));
+document.getElementById("wander").addEventListener("click", () => closeVeil(false));
+addEventListener("keydown", (e) => { if (e.key === "Escape") closeVeil(false); });
+
+/* ---------- rest-stop transmissions: gratitude + quotes ---------- */
+const QUOTES = [
+  { t: "You belong in every room you walk into — especially the ones that feel too big.", by: "your host, Rila" },
+  { t: "Somewhere, something incredible is waiting to be known.", by: "Carl Sagan" },
+  { t: "Rest is part of the mission. Even stars take their time to shine.", by: "mission control" },
+  { t: "You don't have to be the sun today. Being a steady little moon is plenty.", by: "your host, Rila" },
+  { t: "We are all made of star-stuff. Act accordingly.", by: "after Carl Sagan" },
+  { t: "Small steps still move you across the galaxy.", by: "mission control" },
+  { t: "Be so good they name a planet after you. (Working on mine.)", by: "your host, Rila" },
+  { t: "Thank you for being here. This universe is brighter with you in it.", by: "with gratitude, Rila" },
+];
+let qi = 0, qTimer = null;
+const qText = document.getElementById("quoteText"), qBy = document.getElementById("quoteBy");
+function showQuote(i) {
+  qi = (i + QUOTES.length) % QUOTES.length;
+  const apply = () => {
+    qText.textContent = `\u201C${QUOTES[qi].t}\u201D`;
+    qBy.textContent = `— ${QUOTES[qi].by}`;
+    qText.classList.remove("fade");
+  };
+  if (prefersReduced) apply();
+  else { qText.classList.add("fade"); setTimeout(apply, 350); }
+}
+function restartQuotes() {
+  clearInterval(qTimer);
+  if (!prefersReduced && !document.hidden) qTimer = setInterval(() => showQuote(qi + 1), 7000);
+}
+document.getElementById("qPrev").addEventListener("click", () => { showQuote(qi - 1); restartQuotes(); });
+document.getElementById("qNext").addEventListener("click", () => { showQuote(qi + 1); restartQuotes(); });
+document.addEventListener("visibilitychange", restartQuotes);
+showQuote(0); restartQuotes();
+
+/* ---------- make a wish: it lands in the sky ---------- */
+const wished = [];
+document.getElementById("wishForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const inp = document.getElementById("wishInput");
+  const w = inp.value.trim();
+  if (!w) { toast("Type a wish first, traveller — the stars are listening ✦"); inp.focus(); return; }
+  wished.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight * 0.7, ph: Math.random() * 6.28 });
+  if (wished.length > 30) wished.shift();
+  if (!prefersReduced) spawnShooter();
+  toast(`Wish received — “${w.length > 90 ? w.slice(0, 90) + "…" : w}” is now orbiting the Rila-verse ✦`);
+  inp.value = "";
+});
+
+/* ---------- hero / footer sync from ME ---------- */
+$("#heroName").textContent = ME.name;
+$("#heroPitch").textContent = ME.pitch;
+$("#heroMeta").textContent = `${ME.role} · 1st-prize public speaker · currently in orbit around IoT & full-stack dev`;
+$("#heroSignal").href = `mailto:${ME.email}?subject=${encodeURIComponent("Hello from your universe!")}`;
+$("#footName").textContent = ME.name;
+$("#year").textContent = new Date().getFullYear();
+document.title = `${ME.name} · A Small Universe — Portfolio`;
+
+/* ---------- contact buttons ---------- */
+const CLINKS = [
+  { label: "✉ Email", href: `mailto:${ME.email}` },
+  { label: "⛭ GitHub", href: ME.github, missing: "This GitHub rocket hasn't launched yet — add the URL in ME. ✦" },
+  { label: "◈ LinkedIn", href: ME.linkedin, missing: "This LinkedIn satellite is still classified — add the URL in ME. ✦" },
+  { label: "⤓ Resume", href: ME.resume, missing: "Drop a resume.pdf next to this file to arm this button. ✦" },
+];
+$("#clinks").innerHTML = CLINKS.map((c, i) =>
+  `<a class="btn ${i === 0 ? "btn-primary" : "btn-ghost"}" href="${c.href || "#contact"}" ${c.href ? (c.href.startsWith("http") ? 'target="_blank" rel="noopener"' : "") : `data-missing="${i}"`} docking="${c.label}">${c.label}</a>`
+).join("");
+$("#clinks").addEventListener("click", (e) => {
+  const a = e.target.closest("a[data-missing]");
+  if (!a) return;
+  e.preventDefault();
+  toast(CLINKS[+a.dataset.missing].missing);
+});
+
+/* ---------- missions ---------- */
+$("#mgrid").innerHTML = MISSIONS.map((m) => {
+  const badge = m.status === "Launched" ? "b-launched" : m.status === "In orbit" ? "b-orbit" : "b-mapping";
+  const link = (href, label, fallback) => href
+    ? `<a href="${href}" target="_blank" rel="noopener">${label} →</a>`
+    : `<a href="#missions" data-na="${fallback}">${label} →</a>`;
+  return `<article class="mcard reveal">
+    <div class="mtop"><span class="mcode">${m.code}</span><span class="badge ${badge}">${m.status}</span></div>
+    <h3>${m.title}</h3>
+    <p class="mrow"><strong>Problem</strong>${m.problem}</p>
+    <p class="mrow"><strong>Built</strong>${m.built}</p>
+    <p class="mrow"><strong>Result</strong>${m.result}</p>
+    <ul class="chips">${m.stack.map((s) => `<li>${s}</li>`).join("")}</ul>
+    <div class="mlinks">
+      ${link(m.code, "Code", `The ${m.title} code vault is still classified — add the link in MISSIONS. 🛰`)}
+      ${link(m.demo, "Demo", `The ${m.title} demo coordinates are still classified — add the link in MISSIONS. 🛰`)}
+    </div>
+  </article>`;
+}).join("");
+$("#mgrid").addEventListener("click", (e) => {
+  const a = e.target.closest("a[data-na]");
+  if (!a) return;
+  e.preventDefault();
+  toast(a.dataset.na);
+});
+
+/* ================================================================
+   SOLAR SYSTEM
+================================================================ */
+const HUES = [
+  { g: "rgba(94,234,212,.55)",  c1: "#b8fff3", c2: "#2dd4bf", c3: "#0b4f4a" },
+  { g: "rgba(167,139,250,.55)", c1: "#e3d5ff", c2: "#8b5cf6", c3: "#2a1656" },
+  { g: "rgba(246,120,90,.55)",  c1: "#ffd9c4", c2: "#f2764e", c3: "#5b1e0e" },
+  { g: "rgba(246,196,83,.55)",  c1: "#fff3cf", c2: "#eab308", c3: "#574006" },
+  { g: "rgba(255,110,199,.55)", c1: "#ffd6ef", c2: "#ec4899", c3: "#5c1039" },
+  { g: "rgba(96,165,250,.55)",  c1: "#d3e7ff", c2: "#3b82f6", c3: "#122c5e" },
+];
+const SPEEDS = [0.34, 0.27, 0.315, 0.22, 0.25, 0.18];
+const SUN_MSGS = [
+  "☀️ Ouch — I mean… hello! The sun appreciates the high-five.",
+  "☀️ Solar flare of gratitude! Thanks for stopping by my universe.",
+  "☀️ Careful, I'm 5,505°C of pure ambition. And friendliness.",
+  "☀️ You found the easter egg. Recruiters love curiosity — noted. ✦",
+];
+let sunMsgI = 0, pausedPlanet = -1, selectedPlanet = -1;
+
+const sys = $("#system");
+const sunBtn = document.createElement("button");
+sunBtn.className = "sun";
+sunBtn.innerHTML = `<span>${ME.name}</span>`;
+sunBtn.setAttribute("aria-label", `${ME.name}, the sun. Activate for a surprise.`);
+sys.appendChild(sunBtn);
+
+const planets = PLANETS.map((p, i) => {
+  const orbit = document.createElement("div");
+  orbit.className = "orbit";
+  orbit.setAttribute("aria-hidden", "true");
+  sys.appendChild(orbit);
+  const b = document.createElement("button");
+  b.className = "planet";
+  b.innerHTML = `${p.rings ? '<span class="ring" aria-hidden="true"></span>' : ""}<span class="plabel" aria-hidden="true">${p.name}</span>`;
+  b.setAttribute("aria-label", `${p.name}, skill planet, level ${p.level} of 5. Activate to open its dossier.`);
+  b.setAttribute("aria-expanded", "false");
+  b.addEventListener("mouseenter", () => (pausedPlanet = i));
+  b.addEventListener("mouseleave", () => (pausedPlanet = -1));
+  b.addEventListener("focus", () => (pausedPlanet = i));
+  b.addEventListener("blur", () => (pausedPlanet = -1));
+  b.addEventListener("click", (e) => { selectPlanet(i); burstAtButton(b, 26, HUES[i].c2); e.stopPropagation(); });
+  sys.appendChild(b);
+  // spread starting positions evenly so planets never begin in a pile-up
+  return { el: b, orbit, angle: (2 * Math.PI * i) / PLANETS.length + 0.6 };
+});
+
+sunBtn.addEventListener("click", (e) => {
+  burstAtButton(sunBtn, 70, "#f6c453");
+  toast(SUN_MSGS[sunMsgI++ % SUN_MSGS.length]);
+  e.stopPropagation();
+});
+
+function selectPlanet(i) {
+  selectedPlanet = i;
+  planets.forEach((pl, j) => pl.el.setAttribute("aria-expanded", String(j === i)));
+  const p = PLANETS[i];
+  $("#dName").textContent = `🪐 ${p.name}`;
+  $("#dHint").hidden = true;
+  $("#dBody").hidden = false;
+  $("#dType").textContent = p.type;
+  $("#dBlurb").textContent = `“${p.blurb}”`;
+  $("#dNotes").innerHTML = p.usedIn.map((u) => `<li><strong>Deployed at:</strong> ${u}</li>`).join("");
+  $("#dMeter").innerHTML =
+    Array.from({ length: 5 }, (_, k) => `<span class="seg${k < p.level ? " on" : ""}"></span>`).join("") +
+    `<small>orbit proximity ${p.level}/5</small>`;
+}
+
+function layoutSystem() {
+  const W = sys.clientWidth;
+  if (!W) return;
+  const n = PLANETS.length;
+  // Shrink-to-fit: pick a scale where neighbouring orbits clear the biggest
+  // planet, so rings never crowd no matter how many planets join the system.
+  let s = Math.min(1.15, Math.max(0.6, W / 600));
+  const sunD = () => Math.max(88, Math.min(140, W * 0.22));
+  const maxPD = () => Math.max(...PLANETS.map((p) => (16 + p.level * 4.5) * s));
+  const radii = () => {
+    const minR = sunD() / 2 + maxPD() / 2 + 16 * s;
+    const maxR = W / 2 - maxPD() / 2 - 6;
+    return { minR, maxR, step: (maxR - minR) / Math.max(1, n - 1) };
+  };
+  while (s > 0.42 && radii().step < maxPD() * 1.1) s -= 0.04;
+  const { minR, maxR } = radii();
+  sunBtn.style.width = sunBtn.style.height = sunD() + "px";
+  planets.forEach((pl, i) => {
+    const r = n === 1 ? (minR + maxR) / 2 : minR + ((maxR - minR) * i) / (n - 1);
+    pl.r = r;
+    const d = (16 + PLANETS[i].level * 4.5) * s;
+    pl.d = d;
+    pl.el.style.width = pl.el.style.height = d + "px";
+    const h = HUES[i % HUES.length];
+    pl.el.style.setProperty("--glow", h.g);
+    pl.el.style.background = `radial-gradient(circle at 30% 30%, ${h.c1} 0%, ${h.c2} 45%, ${h.c3} 100%)`;
+    pl.orbit.style.width = pl.orbit.style.height = r * 2 + "px";
+    if (i === 0) positionPlanets();
+  });
+}
+function positionPlanets() {
+  const W = sys.clientWidth, c = W / 2;
+  planets.forEach((pl) => {
+    if (pl.r == null) return;
+    const x = c + pl.r * Math.cos(pl.angle);
+    const y = c + pl.r * Math.sin(pl.angle);
+    pl.el.style.left = x + "px";
+    pl.el.style.top = y + "px";
+  });
+}
+addEventListener("resize", layoutSystem);
+layoutSystem();
+
+/* ================================================================
+   STARFIELD (3 depth layers + shooting stars + click bursts)
+================================================================ */
+const cv = $("#stars"), ctx = cv.getContext("2d");
+let stars = [], shooters = [], parts = [];
+let mx = 0, my = 0, tmx = 0, tmy = 0, nextShoot = 0;
+
+function buildStars() {
+  const W = innerWidth, H = innerHeight;
+  stars = [];
+  const layers = [
+    { n: Math.round(W * H / 16000), s: [0.4, 1.1], par: 0.006, tw: 1.8 },
+    { n: Math.round(W * H / 26000), s: [0.9, 1.9], par: 0.016, tw: 1.1 },
+    { n: Math.round(W * H / 52000), s: [1.5, 2.7], par: 0.034, tw: 0.7 },
+  ];
+  layers.forEach((L) => {
+    for (let i = 0; i < L.n; i++) {
+      stars.push({ x: Math.random() * W, y: Math.random() * H,
+        r: L.s[0] + Math.random() * (L.s[1] - L.s[0]),
+        par: L.par, ph: Math.random() * 6.28, sp: L.tw * (0.5 + Math.random()),
+        hue: Math.random() < 0.12 ? "255,110,199" : Math.random() < 0.3 ? "167,139,250" : "235,240,255" });
+    }
+  });
+}
+function sizeCanvas() {
+  const dpr = Math.min(2, devicePixelRatio || 1);
+  cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+  cv.style.width = innerWidth + "px"; cv.style.height = innerHeight + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  buildStars();
+}
+sizeCanvas();
+addEventListener("resize", sizeCanvas);
+addEventListener("pointermove", (e) => {
+  tmx = (e.clientX / innerWidth - 0.5) * 2;
+  tmy = (e.clientY / innerHeight - 0.5) * 2;
+}, { passive: true });
+
+function spawnShooter() {
+  const x = Math.random() * innerWidth * 0.7 + innerWidth * 0.15;
+  shooters.push({ x, y: -20, vx: -(4 + Math.random() * 4), vy: 3 + Math.random() * 3, life: 1 });
+}
+function burst(x, y, n, color) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * 6.28, sp = 0.6 + Math.random() * 3.2;
+    parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 0.4,
+      life: 1, decay: 0.012 + Math.random() * 0.02, r: 1 + Math.random() * 2.4, color });
+  }
+}
+function burstAtButton(btn, n, color) {
+  const r = btn.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2 + scrollY * 0, n, color);
+}
+addEventListener("pointerdown", (e) => burst(e.clientX, e.clientY, 14, "#a78bfa"), { passive: true });
+
+let last = performance.now();
+function tick(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+  mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
+  const sy = scrollY, t = now / 1000;
+
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  for (const s of stars) {
+    const tw = prefersReduced ? 0.85 : 0.55 + 0.45 * Math.sin(t * s.sp + s.ph);
+    let x = (s.x + mx * s.par * 900) % innerWidth;
+    let y = (s.y + my * s.par * 900 + sy * s.par * 1.6) % innerHeight;
+    if (x < 0) x += innerWidth; if (y < 0) y += innerHeight;
+    ctx.globalAlpha = tw;
+    ctx.fillStyle = `rgb(${s.hue})`;
+    ctx.beginPath(); ctx.arc(x, y, s.r, 0, 6.29); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // landed wishes: golden stars that stay in the sky
+  for (const s of wished) {
+    const tw = prefersReduced ? 0.85 : 0.5 + 0.5 * Math.sin(t * 2 + s.ph);
+    ctx.globalAlpha = 0.3 + 0.5 * tw;
+    ctx.fillStyle = "#f6c453";
+    ctx.beginPath(); ctx.arc(s.x, s.y, 2.4, 0, 6.29); ctx.fill();
+    ctx.globalAlpha = 0.16 * tw;
+    ctx.beginPath(); ctx.arc(s.x, s.y, 6, 0, 6.29); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  if (!prefersReduced) {
+    if (now > nextShoot) { spawnShooter(); nextShoot = now + 3500 + Math.random() * 3500; }
+    shooters = shooters.filter((s) => s.life > 0);
+    for (const s of shooters) {
+      s.x += s.vx; s.y += s.vy; s.life -= dt * 1.1;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 12, s.y - s.vy * 12);
+      grad.addColorStop(0, `rgba(255,255,255,${0.9 * s.life})`);
+      grad.addColorStop(1, "rgba(255,110,199,0)");
+      ctx.strokeStyle = grad; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - s.vx * 12, s.y - s.vy * 12); ctx.stroke();
+    }
+    parts = parts.filter((p) => p.life > 0);
+    for (const p of parts) {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.03; p.life -= p.decay;
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.29); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    // orbit planets (paused one freezes; hover/focus = pause)
+    planets.forEach((pl, i) => {
+      if (i !== pausedPlanet) pl.angle += SPEEDS[i % SPEEDS.length] * dt;
+    });
+    positionPlanets();
+  }
+  requestAnimationFrame(tick);
+}
+if (prefersReduced) { positionPlanets(); }
+requestAnimationFrame(tick);
+
+/* ---------- scroll reveal ---------- */
+const io = new IntersectionObserver(
+  (es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))),
+  { threshold: 0.12 }
+);
+if (prefersReduced) document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+else document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+/* ---------- active nav ---------- */
+const navAs = [...document.querySelectorAll(".navlinks a")];
+const nio = new IntersectionObserver((es) => {
+  es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    navAs.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+  });
+}, { rootMargin: "-40% 0px -55% 0px" });
+["planets", "missions", "origin", "reststop", "contact"].forEach((id) => { const s = document.getElementById(id); s && nio.observe(s); });
+</script>
+</body>
+</html>
