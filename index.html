@@ -157,7 +157,7 @@ a{color:var(--teal)}
 .qnav button:hover{border-color:var(--pink)}
 
 /* wish box */
-.wish{max-width:560px;margin:2.2rem auto 0;background:var(--card);border:1px solid rgba(167,139,250,.4);border-radius:var(--radius);padding:1.6rem;text-align:center}
+.wish{max-width:560px;margin:0 auto 2.5rem;background:var(--card);border:1px solid rgba(167,139,250,.4);border-radius:var(--radius);padding:1.6rem;text-align:center}
 .wish h3{font-size:1.5rem}
 .wish form{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;justify-content:center}
 .wish input{flex:1 1 220px;background:var(--bg0);border:1px solid var(--card-brd);border-radius:999px;color:var(--ink);padding:.7rem 1.1rem;font:inherit}
@@ -196,6 +196,46 @@ body.locked{overflow:hidden}
 .veil-card .hero-actions{justify-content:center;margin-bottom:0}
 .veil-face{font-size:2.6rem;display:block;margin-bottom:.4rem;filter:drop-shadow(0 0 18px rgba(246,196,83,.7))}
 
+/* captain's intro card */
+.intro-card{position:fixed;top:72px;left:50%;transform:translateX(-50%);width:min(92vw,440px);z-index:150;background:rgba(12,17,36,.96);border:1px solid rgba(94,234,212,.45);border-radius:var(--radius);padding:1.4rem 1.5rem;box-shadow:0 24px 70px -20px rgba(94,234,212,.4);backdrop-filter:blur(12px)}
+.intro-card[hidden]{display:none}
+.intro-text{margin:.2rem 0 1rem;color:var(--muted)}
+.intro-text strong{color:var(--ink)}
+.intro-text em{color:var(--gold)}
+.intro-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+
+/* signal (contact) form */
+.signal-form{max-width:640px;margin:1.6rem auto 0;display:grid;gap:.9rem;text-align:left;background:var(--card);border:1px solid var(--card-brd);border-radius:var(--radius);padding:1.4rem;backdrop-filter:blur(8px)}
+.frow{display:grid;gap:.9rem;grid-template-columns:1fr}
+.signal-form label{display:grid;gap:.35rem;font-size:.88rem;font-weight:500}
+.signal-form input,.signal-form textarea{background:var(--bg0);border:1px solid var(--card-brd);border-radius:12px;color:var(--ink);padding:.7rem .9rem;font:inherit;width:100%}
+.signal-form input:focus,.signal-form textarea:focus{outline:2px solid var(--pink);outline-offset:1px}
+.form-note{min-height:1.4em;margin:0;font-size:.9rem;color:var(--muted)}
+@media (min-width:640px){.frow{grid-template-columns:1fr 1fr}}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:120;box-shadow:0 0 12px rgba(255,110,199,.6)}
+
+/* comet cursor glow */
+#comet{position:fixed;top:0;left:0;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;pointer-events:none;z-index:2;background:radial-gradient(circle,rgba(255,110,199,.14),rgba(167,139,250,.07) 45%,transparent 70%)}
+@media (hover:none),(pointer:coarse){#comet{display:none}}
+
+/* marquee */
+.marquee{overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:.7rem 0;position:relative;z-index:1;background:rgba(255,255,255,.015)}
+.mtrack{display:inline-flex;gap:2.2rem;white-space:nowrap;font-family:var(--mono);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-right:2.2rem;animation:slide 32s linear infinite}
+.mtrack b{color:var(--gold);font-weight:400}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* hero stats + wish wall */
+.hero-stats{font-family:var(--mono);font-size:.85rem;color:var(--gold);letter-spacing:.08em;margin:.4rem 0 0}
+/* wish launch flight: the wish itself becomes a shooting star */
+.wish-flight{position:fixed;top:0;left:0;z-index:150;pointer-events:none;display:flex;align-items:center;gap:0}
+.wf-tail{width:130px;height:2px;flex:none;transform-origin:left center;transform:rotate(36deg) translateX(-4px);background:linear-gradient(to right,rgba(255,255,255,.95),rgba(255,110,199,.55),transparent);border-radius:99px;filter:drop-shadow(0 0 6px rgba(255,110,199,.8))}
+.wf-text{font-family:var(--serif);font-style:italic;font-size:clamp(.95rem,2.4vw,1.25rem);color:#fff7d6;text-shadow:0 0 14px rgba(246,196,83,.95),0 0 34px rgba(255,110,199,.6);white-space:nowrap}
+
+/* styled scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#060a16}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--pink));border-radius:99px}
+
 /* reveal (only when JS runs) */
 .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
@@ -212,6 +252,7 @@ body.locked{overflow:hidden}
   html{scroll-behavior:auto}
   .sun{animation:none}
   .veil-card{animation:none}
+  .mtrack{animation:none}
   .js .reveal{opacity:1;transform:none;transition:none}
 }
 </style>
@@ -219,6 +260,8 @@ body.locked{overflow:hidden}
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <canvas id="stars" aria-hidden="true"></canvas>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div id="comet" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="veilTitle" hidden>
@@ -236,7 +279,15 @@ body.locked{overflow:hidden}
 
 <header class="navwrap">
   <nav class="nav container" aria-label="Primary">
-    <a class="logo" href="#top">✦ <b>Rila</b>·verse</a>
+    <a class="logo" href="#top" id="logoBtn" aria-expanded="false" aria-controls="introCard" style="cursor:pointer">✦ <b>Rila</b>·verse</a>
+    <div class="intro-card" id="introCard" role="dialog" aria-label="Quick intro about Rila" hidden>
+      <p class="eyebrow">✦ Captain's card</p>
+      <p class="intro-text"><strong>Mariyam Rila M M</strong> — CSE undergrad at P.A College of Engineering (CGPA 9.0) from Mangalore, India. I build IoT systems and full-stack apps, then talk about them on stage — 1st-prize public speaker. This universe <em>is</em> my portfolio: 6 skill-planets, 3 missions, 1 sun (me).</p>
+      <div class="intro-actions">
+        <a href="#planets" class="btn btn-primary btn-small" id="introGo">Explore ↓</a>
+        <button class="btn btn-ghost btn-small" id="introClose">Close</button>
+      </div>
+    </div>
     <ul class="navlinks">
       <li><a href="#planets">Planets</a></li>
       <li><a href="#missions">Missions</a></li>
@@ -258,7 +309,10 @@ body.locked{overflow:hidden}
       <a class="btn btn-ghost" href="#contact" id="heroSignal">Send a signal</a>
     </div>
     <p class="hero-meta reveal" id="heroMeta">CSE student · India · currently in orbit around IoT &amp; full-stack dev</p>
+    <p class="hero-stats reveal" id="heroStats"></p>
   </section>
+
+  <div class="marquee" aria-hidden="true"><div class="mtrack" id="mtrack"></div></div>
 
   <!-- PLANETS -->
   <section class="section container system-shell" id="planets">
@@ -326,10 +380,6 @@ body.locked{overflow:hidden}
 
   <!-- CONTACT -->
   <section class="section container contact" id="contact">
-    <p class="eyebrow reveal" style="text-align:center">Incoming signal</p>
-    <h2 class="reveal">Want to build <em>something</em> together?</h2>
-    <p class="section-lead reveal" style="margin-inline:auto;text-align:center">Recruiters, collaborators, fellow travellers — my frequency is open. I reply within 1–2 days.</p>
-    <div class="clinks reveal" id="clinks"></div>
     <div class="wish reveal">
       <h3>Psst — make a wish ✦</h3>
       <p class="muted" style="margin:.2rem 0 0">Type a wish, send it skyward, and watch it land among the stars.</p>
@@ -338,6 +388,19 @@ body.locked{overflow:hidden}
         <button class="btn btn-primary btn-small" type="submit" style="padding:.7rem 1.3rem;font-size:.95rem">Send it to the stars</button>
       </form>
     </div>
+    <p class="eyebrow reveal" style="text-align:center">Incoming signal</p>
+    <h2 class="reveal">Want to build <em>something</em> together?</h2>
+    <p class="section-lead reveal" style="margin-inline:auto;text-align:center">Recruiters, collaborators, fellow travellers — my frequency is open. I reply within 1–2 days.</p>
+    <form class="signal-form reveal" id="signalForm" novalidate>
+      <div class="frow">
+        <label>Your name<input type="text" name="name" required autocomplete="name" placeholder="Ada Lovelace" /></label>
+        <label>Your email<input type="email" name="email" required autocomplete="email" placeholder="ada@analytical.engine" /></label>
+      </div>
+      <label>Message<textarea name="message" rows="4" required placeholder="Hello Rila, let's build…"></textarea></label>
+      <div><button class="btn btn-primary" type="submit" id="signalBtn">Transmit signal ✦</button></div>
+      <p class="form-note" id="signalNote" role="status" aria-live="polite"></p>
+    </form>
+    <div class="clinks reveal" id="clinks"></div>
   </section>
 </main>
 
@@ -362,7 +425,19 @@ const ME = {
   email: "mariyamrilamm@gmail.com",
   github: "",        // e.g. "https://github.com/yourhandle"
   linkedin: "https://www.linkedin.com/in/mariyam-rila-m-m-431936382",
-  resume: "resume.pdf" // drop your resume.pdf next to this file (or paste a URL)
+  resume: "resume.pdf", // drop your resume.pdf next to this file (or paste a URL)
+  // RECEIVE visitors' wishes + contact-form messages by email (static sites
+  // can't share a database on their own, so both point here). Free options:
+  //  - Web3Forms: https://web3forms.com → get a key, then set
+  //      wishEndpoint: "https://api.web3forms.com/submit",
+  //      wishExtra: { access_key: "YOUR-KEY" }
+  //  - Formspree: https://formspree.io → new form, then set
+  //      wishEndpoint: "https://formspree.io/f/YOUR-ID",
+  //      wishExtra: {}
+  // Leave both empty and wishes still light up the visitor's own sky, while
+  // the contact form falls back to opening the visitor's mail app.
+  wishEndpoint: "",
+  wishExtra: {},
 };
 
 // [skill, type, level 1-5, fun line, where I used it (array)]
@@ -423,6 +498,57 @@ function toast(msg) {
   toastT = setTimeout(() => t.classList.remove("show"), 3200);
 }
 
+/* ---------- captain's card: logo gives the brief intro ---------- */
+const logoBtn = document.getElementById("logoBtn");
+const introCard = document.getElementById("introCard");
+function toggleIntro(show) {
+  const open = show ?? introCard.hidden;
+  introCard.hidden = !open;
+  logoBtn.setAttribute("aria-expanded", String(open));
+  if (open) document.getElementById("introClose").focus({ preventScroll: true });
+}
+logoBtn.addEventListener("click", (e) => { e.preventDefault(); toggleIntro(); });
+document.getElementById("introClose").addEventListener("click", () => { toggleIntro(false); logoBtn.focus({ preventScroll: true }); });
+document.getElementById("introGo").addEventListener("click", () => toggleIntro(false));
+document.addEventListener("click", (e) => {
+  if (!introCard.hidden && !introCard.contains(e.target) && !logoBtn.contains(e.target)) toggleIntro(false);
+});
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !introCard.hidden) { toggleIntro(false); logoBtn.focus({ preventScroll: true }); }
+});
+
+/* ---------- signal form: actually sends (via ME.wishEndpoint) ---------- */
+document.getElementById("signalForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const name = (fd.get("name") || "").toString().trim();
+  const email = (fd.get("email") || "").toString().trim();
+  const msg = (fd.get("message") || "").toString().trim();
+  const note = document.getElementById("signalNote");
+  const btn = document.getElementById("signalBtn");
+  if (!name || !email || !msg) { note.textContent = "Please fill every field so the signal arrives intact."; return; }
+  if (!ME.wishEndpoint) {
+    // no inbox connected yet: fall back to the visitor's mail app, pre-addressed
+    toast("Signal station needs its frequency — add the free Web3Forms key in ME (2 minutes) ✦");
+    location.href = `mailto:${ME.email}?subject=${encodeURIComponent(`Portfolio signal from ${name}`)}&body=${encodeURIComponent(`${msg}\n\n— ${name} (${email})`)}`;
+    return;
+  }
+  btn.disabled = true; note.textContent = "Transmitting…";
+  try {
+    const r = await fetch(ME.wishEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ subject: `New signal from ${name}`, message: `${msg}\n\n— ${name} (${email})`, ...ME.wishExtra }),
+    });
+    if (!r.ok) throw new Error("bad status");
+    note.textContent = "Signal received! Rila replies within 1–2 days ✦";
+    e.target.reset();
+    toast("Signal transmitted across the galaxy ✦");
+  } catch {
+    note.textContent = "Transmission jammed — please use the Email button instead.";
+  } finally { btn.disabled = false; }
+});
+
 /* ---------- welcome veil: Rila greets every visitor ---------- */
 const veil = document.getElementById("veil");
 function closeVeil(hopIn) {
@@ -473,17 +599,66 @@ document.getElementById("qNext").addEventListener("click", () => { showQuote(qi 
 document.addEventListener("visibilitychange", restartQuotes);
 showQuote(0); restartQuotes();
 
-/* ---------- make a wish: it lands in the sky ---------- */
+/* ---------- make a wish: it launches across the sky, then lands as a star ---------- */
 const wished = [];
+const store = {
+  load() { try { return JSON.parse(localStorage.getItem("rilaverse-wishes") || "[]"); } catch { return []; } },
+  save(w) { try { localStorage.setItem("rilaverse-wishes", JSON.stringify(w.slice(-30))); } catch {} },
+};
+let savedWishes = store.load();
+// re-scatter this device's past wishes across the sky
+savedWishes.forEach((w) => wished.push({ x: (w.fx ?? Math.random()) * innerWidth, y: (w.fy ?? Math.random() * 0.7) * innerHeight, ph: Math.random() * 6.28 }));
+/* launch the wish itself across the sky as a glowing comet */
+function flyWish(text, x, y) {
+  const el = document.createElement("div");
+  el.className = "wish-flight";
+  el.setAttribute("aria-hidden", "true");
+  el.innerHTML = `<span class="wf-text">“${text}”</span><span class="wf-tail"></span>`;
+  el.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
+  document.body.appendChild(el);
+  const dx = -innerWidth * 0.34, dy = -innerHeight * 0.45;
+  el.animate(
+    [
+      { transform: `translate(${x}px,${y}px) translate(-50%,-50%) scale(1)`, opacity: 1 },
+      { transform: `translate(${x + dx}px,${y + dy}px) translate(-50%,-50%) scale(.75)`, opacity: 0 },
+    ],
+    { duration: 2100, easing: "cubic-bezier(.2,.6,.3,1)" }
+  ).onfinish = () => el.remove();
+  setTimeout(() => el.remove(), 2600); // safety sweep
+}
 document.getElementById("wishForm").addEventListener("submit", (e) => {
   e.preventDefault();
   const inp = document.getElementById("wishInput");
   const w = inp.value.trim();
   if (!w) { toast("Type a wish first, traveller — the stars are listening ✦"); inp.focus(); return; }
-  wished.push({ x: Math.random() * innerWidth, y: Math.random() * innerHeight * 0.7, ph: Math.random() * 6.28 });
-  if (wished.length > 30) wished.shift();
-  if (!prefersReduced) spawnShooter();
-  toast(`Wish received — “${w.length > 90 ? w.slice(0, 90) + "…" : w}” is now orbiting the Rila-verse ✦`);
+  const entry = {
+    text: w.length > 90 ? w.slice(0, 90) + "…" : w,
+    date: new Date().toLocaleDateString(),
+    fx: Math.random(), fy: Math.random() * 0.7,
+  };
+  const land = () => {
+    wished.push({ x: entry.fx * innerWidth, y: entry.fy * innerHeight, ph: Math.random() * 6.28 });
+    savedWishes.push(entry); store.save(savedWishes);
+    if (savedWishes.length > 40) { savedWishes = savedWishes.slice(-30); wished.splice(0, wished.length - 30); }
+    toast(`Wish received — “${entry.text}” is now orbiting the Rila-verse ✦`);
+  };
+  if (prefersReduced) land();
+  else {
+    // the wish itself launches: glowing text-comet + meteor streak, star lands after
+    const r = inp.getBoundingClientRect();
+    flyWish(entry.text, r.left + r.width / 2, Math.max(60, r.top));
+    spawnShooter();
+    setTimeout(land, 1750);
+  }
+  // forward the wish to Rila's inbox (configure ME.wishEndpoint to receive these)
+  if (ME.wishEndpoint) {
+    fetch(ME.wishEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ subject: "A wish landed in your universe ✦", message: w, ...ME.wishExtra }),
+    }).catch(() => {});
+  }
+  toast(`Wish received — “${entry.text}” is now orbiting the Rila-verse ✦`);
   inp.value = "";
 });
 
@@ -492,6 +667,21 @@ $("#heroName").textContent = ME.name;
 $("#heroPitch").textContent = ME.pitch;
 $("#heroMeta").textContent = `${ME.role} · 1st-prize public speaker · currently in orbit around IoT & full-stack dev`;
 $("#heroSignal").href = `mailto:${ME.email}?subject=${encodeURIComponent("Hello from your universe!")}`;
+$("#heroStats").textContent = `◉ ${PLANETS.length} planets · ▲ ${MISSIONS.length} missions · ☀ 1 sun (occupied)`;
+
+/* marquee: skill ticker between hero and planets */
+{
+  const items = PLANETS.map((p) => p.name).join(" <b>✦</b> ");
+  $("#mtrack").innerHTML = `<span>${items} <b>✦</b>&nbsp;</span><span>${items} <b>✦</b>&nbsp;</span>`;
+}
+
+/* scroll progress bar */
+const progress = $("#progress");
+addEventListener("scroll", () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+}, { passive: true });
 $("#footName").textContent = ME.name;
 $("#year").textContent = new Date().getFullYear();
 document.title = `${ME.name} · A Small Universe — Portfolio`;
@@ -656,6 +846,9 @@ layoutSystem();
 const cv = $("#stars"), ctx = cv.getContext("2d");
 let stars = [], shooters = [], parts = [];
 let mx = 0, my = 0, tmx = 0, tmy = 0, nextShoot = 0;
+let px = innerWidth / 2, py = innerHeight / 3, cx = px, cy = py;
+const comet = document.getElementById("comet");
+const finePointer = matchMedia("(pointer:fine)").matches;
 
 function buildStars() {
   const W = innerWidth, H = innerHeight;
@@ -686,6 +879,7 @@ addEventListener("resize", sizeCanvas);
 addEventListener("pointermove", (e) => {
   tmx = (e.clientX / innerWidth - 0.5) * 2;
   tmy = (e.clientY / innerHeight - 0.5) * 2;
+  px = e.clientX; py = e.clientY;
 }, { passive: true });
 
 function spawnShooter() {
@@ -710,6 +904,10 @@ function tick(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
   mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
+  if (finePointer && !prefersReduced) {
+    cx += (px - cx) * 0.08; cy += (py - cy) * 0.08;
+    comet.style.transform = `translate(${cx}px,${cy}px)`;
+  } else comet.style.display = "none";
   const sy = scrollY, t = now / 1000;
 
   ctx.clearRect(0, 0, innerWidth, innerHeight);
